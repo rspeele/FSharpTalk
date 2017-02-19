@@ -264,3 +264,78 @@ It also becomes a nightmare to tell how a given domain works (say, syntax highli
 you've got to look at the method override in each class, and the class files are liable to be huge since each
 one has to deal with all these different domains.
 
+F# discriminated unions are made to deal with this problem. They flip the problem around.
+
+In OO, you specify the possible abstract methods to override in one place,
+and can implement them with different subclasses in infinitely many places.
+
+With DUs you specify the possible subclasses in one place, and can implement different methods
+on those subclasses in infinitely many places.
+
+```
+type Expression =
+    | Number of int
+    | Add of Expression * Expression
+    | Multiply of Expression * Expression
+```
+
+Then you could write an `evaluate` function like this -- anywhere, even in another project:
+
+```
+let rec evaluate (expr : Expression) =
+    match expr with
+    | Number n -> n
+    | Add (left, right) -> evaluate left + evaluate right
+    | Multiply (left, right) -> evaluate left * evaluate right
+```
+
+You can do the same for all your other situations, like syntax highlighting and optimization, and
+now those concerns can be implemented in isolation, in separate projects with their own dependencies.
+
+Important fact: the compiler will yell at you if you don't handle every case. This is nice when you add
+a new case, say `| Divide of Expression * Expression` and the compiler points you to all the places in your
+code you have to update to handle that new possibility.
+
+### Why this vs. OO?
+
+Am I trying to convince you this is better than OO with inheritance? Absolutely not! Each solution has its place.
+
+For example, my favorite example of OO programming in .NET has to be `System.IO.Stream`.
+
+You can use the `Stream` class to read/write data to a file, TCP connection, serial port, in-memory buffer, HTTP
+request, and more. It would be awful if `Stream` were defined as a DU in F#, because it would be limited to the
+cases the designer had thought of in the first place. As it is, you can extend `Stream` to handle whatever kind
+of backing "stream" you can imagine.
+
+What it boils down to is that if you're trying to represent different possibilities of *data*, you should use
+a discriminated union. If you're trying to represent different implementations of a common *behavior* you should
+use a class hierarchy. It is liberating to have both options at your disposal, instead of being limited to class
+hierarchies.
+
+Speaking of options, one of the places where DUs show up frequently in F# is in the `option` type.
+This roughly corresponds to the `System.Nullable` type that is used in C# when you have a value type that could
+be null, like `int?`. In C# you might write:
+
+```
+public static void Show(int? value) {
+    if (x.HasValue)
+    {
+        Console.WriteLine(x.Value);
+    }
+    else
+    {
+        Console.WriteLine("(null)");
+    }
+}
+```
+
+In F# you can pattern match to do the same thing:
+
+```
+let show (value : option<int>) =
+    match x with
+    | Some value -> Console.WriteLine(value)
+    | None -> Console.WriteLine("(null)")
+```
+
+The nice thing here is that you can't possibly refer to the value in the "None" branch.
