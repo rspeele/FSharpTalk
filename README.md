@@ -225,10 +225,10 @@ a break.
 Ok, for those of you who have survived the onslaught of pointless differences, here's the good part.
 Please take this opportunity to yawn and stretch.
 
-The first feature I'm going to talk about seems a little bland, but I swear, if this was the only advantage
-F# had it would still be worth using. This changed my life. It's called "discriminated unions".
+## Discriminated unions and pattern matching
 
-## Discriminated unions
+The first feature I'm going to talk about seems a little bland at first, but I swear, if this was the only advantage
+F# had it would still be worth using. This changed my life. It's called "discriminated unions".
 
 So, here we are in North Carolina, and when you hear "discriminated unions", the first thing that comes to mind is
 probably gay marriage. This isn't that, but it's still important to keep an open mind.
@@ -279,7 +279,8 @@ type Expression =
     | Multiply of Expression * Expression
 ```
 
-Then you could write an `evaluate` function like this -- anywhere, even in another project:
+Then you could write an `evaluate` function like this -- anywhere, even in another project, using a feature
+called pattern matching.
 
 ```
 let rec evaluate (expr : Expression) =
@@ -317,7 +318,7 @@ This roughly corresponds to the `System.Nullable` type that is used in C# when y
 be null, like `int?`. In C# you might write:
 
 ```
-public static void Show(int? value) {
+public static void Show(int? x) {
     if (x.HasValue)
     {
         Console.WriteLine(x.Value);
@@ -332,10 +333,13 @@ public static void Show(int? value) {
 In F# you can pattern match to do the same thing:
 
 ```
-let show (value : option<int>) =
+let show (x : option<int>) =
     match x with
     | Some value -> Console.WriteLine(value)
     | None -> Console.WriteLine("(null)")
 ```
 
-The nice thing here is that you can't possibly refer to the value in the "None" branch.
+The nice thing here is that you can't possibly refer to the value in the "None" branch. In C# you could easily
+write something using `x.Value` in the `else` branch.
+
+## 
