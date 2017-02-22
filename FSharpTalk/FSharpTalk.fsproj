@@ -55,16 +55,29 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="packages.fsx" />
+    <Content Include="1205.txt" />
     <None Include="FizzBuzz.fsx" />
     <None Include="FizzBuzz.csx" />
+    <Content Include="1210.txt" />
     <None Include="Fibonacci.fsx" />
+    <None Include="Fibonacci.csx" />
     <Compile Include="Rectangle.fsx" />
     <None Include="Rectangle.csx" />
+    <Content Include="1215.txt" />
     <None Include="ExpressionClasses.fsx" />
     <None Include="ExpressionClasses.csx" />
     <None Include="ExpressionDU.fsx" />
+    <Content Include="1230.txt" />
+    <None Include="TypeProviderCSV.fsx" />
+    <None Include="sample.csv" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Data">
+      <HintPath>..\packages\FSharp.Data.2.3.2\lib\net40\FSharp.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
@@ -74,6 +87,8 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
