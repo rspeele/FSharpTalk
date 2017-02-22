@@ -69,6 +69,7 @@
     <None Include="ExpressionClasses.fsx" />
     <None Include="ExpressionClasses.csx" />
     <None Include="ExpressionDU.fsx" />
+    <None Include="OtherPatternMatching.fsx" />
     <Content Include="1230.txt" />
     <None Include="sample.csv" />
     <None Include="TypeProviderCSV.fsx" />

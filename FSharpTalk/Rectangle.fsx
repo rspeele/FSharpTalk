@@ -1,5 +1,5 @@
 ﻿/// Represents an immutable rectangle.
-type Rectangle(top : int, left : int, width, height) =
+type Rectangle(top, left, width, height) =
     // Calculate area when constructed.
     let precomputedArea = width * height
 
