@@ -55,10 +55,14 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <None Include="SuperficialStatic.fsx" />
-    <None Include="SuperficialStatic.csx" />
-    <Compile Include="SuperficialRectangle.fsx" />
-    <None Include="SuperficialRectangle.csx" />
+    <None Include="FizzBuzz.fsx" />
+    <None Include="FizzBuzz.csx" />
+    <None Include="Fibonacci.fsx" />
+    <Compile Include="Rectangle.fsx" />
+    <None Include="Rectangle.csx" />
+    <None Include="ExpressionClasses.fsx" />
+    <None Include="ExpressionClasses.csx" />
+    <None Include="ExpressionDU.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

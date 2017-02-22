@@ -1,28 +1,22 @@
 ﻿/// <summary>
-/// Some differences between languages are just superficial.
+/// Represents an immutable rectangle.
 /// </summary>
 public class Rectangle
 {
-    private readonly int _top;
-    private readonly int _left;
-    private readonly int _width;
-    private readonly int _height;
     private readonly int _precomputedArea;
-
     public Rectangle(int top, int left, int width, int height)
     {
-        _top = top;
-        _left = left;
-        _width = width;
-        _height = height;
+        Top = top;
+        Left = left;
+        Width = width;
+        Height = height;
         // Calculate area when constructed.
         _precomputedArea = width * height;
     }
-
-    public int Top => _top;
-    public int Left => _left;
-    public int Width => _width;
-    public int Height => _height;
+    public int Top { get; }
+    public int Left { get; }
+    public int Width { get; }
+    public int Height { get; }
     public int Right => _left + _width;
     public int Bottom => _top + _height;
     public int Area => _precomputedArea;
