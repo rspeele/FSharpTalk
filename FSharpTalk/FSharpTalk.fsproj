@@ -56,6 +56,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Content Include="packages.config" />
+    <None Include="TypeProviderHTML.fsx" />
     <None Include="packages.fsx" />
     <Content Include="1205.txt" />
     <None Include="FizzBuzz.fsx" />
@@ -70,8 +71,8 @@
     <None Include="ExpressionClasses.csx" />
     <None Include="ExpressionDU.fsx" />
     <Content Include="1230.txt" />
-    <None Include="TypeProviderCSV.fsx" />
     <None Include="sample.csv" />
+    <None Include="TypeProviderCSV.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">
