@@ -1,6 +1,5 @@
-﻿#I "../packages/FSharp.Data.2.3.2/lib/net40"
-#r "FSharp.Data.DesignTime.dll"
-#r "FSharp.Data.dll"
+﻿#r "../packages/FSharp.Data.2.3.2/lib/net40/FSharp.Data.DesignTime.dll"
+#r "../packages/FSharp.Data.2.3.2/lib/net40/FSharp.Data.dll"
 
 open FSharp.Data
 open System
