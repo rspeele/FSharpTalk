@@ -1,11 +1,11 @@
 ﻿public static class Whatever
 {
-    private static int Fib(int prev1, int prev2, int countdown)
+    private static int Fib(int previous, int current, int countdown)
     {
         if (countdown <= 0)
-            return prev2;
+            return current;
         else
-            return Fib(prev2, prev1 + prev2, countdown - 1);
+            return Fib(current, previous + current, countdown - 1);
     }
 
     public static int Fibonacci(int n) =>

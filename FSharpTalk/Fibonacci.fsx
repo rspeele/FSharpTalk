@@ -1,10 +1,10 @@
 ﻿module Whatever =
     let fibonacci n =
-        let rec fib prev1 prev2 countdown =
+        let rec fib previous current countdown =
             if countdown <= 0 then
-                prev2
+                current
             else
-                fib prev2 (prev1 + prev2) (countdown - 1)
+                fib current (previous + current) (countdown - 1)
         fib 0 1 n
 
 open Whatever
