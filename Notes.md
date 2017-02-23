@@ -1,11 +1,17 @@
 # What is F#
 
 * .NET language, but much more differences between C# and F# than between C# and VB.NET
-* Do emphasise the ease of adding F# code to a largely C# solution
+* Because it's .NET, you have access to all the same libraries; you can easily use classes written in F# from C# code and vice versa
+* It makes sense to have a solution with a bunch of C# projects and a few F# projects
 * Have been vaguely familiar with it for 4 years, finally jumped into using it on DC-UPS in March 2015
 * F# interactive is handy -- show as calculator, hello world
 
 # Boring stuff
+
+* Languages have two kinds of differences, superficial differences and conceptual differences.
+* F# has a few big conceptual differences that are very cool
+* But also a lot of superficial differences because of its lineage with ML and Haskell instead of C and Java.
+* Want to get to the good parts, but have to cover some of the boring stuff to get familiarity.
 
 ## FizzBuzz
 
