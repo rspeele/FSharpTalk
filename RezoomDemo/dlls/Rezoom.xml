@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Rezoom</name></assembly>
+<members>
+<member name="P:FSharp.Control.Tasks.ContextInsensitive.task">
+<summary>
+ Builds a `System.Threading.Tasks.Task&lt;&apos;a&gt;` similarly to a C# async/await method, but with
+ all awaited tasks automatically configured *not* to resume on the captured context.
+ This is often preferable when writing library code that is not context-aware, but undesirable when writing
+ e.g. code that must interact with user interface controls on the same thread as its caller.
+</summary>
+</member>
+<member name="P:FSharp.Control.Tasks.ContextSensitive.task">
+<summary>
+ Builds a `System.Threading.Tasks.Task&lt;&apos;a&gt;` similarly to a C# async/await method.
+ Use this like `task { let! taskResult = someTask(); return taskResult.ToString(); }`.
+</summary>
+</member>
+<member name="F:FSharp.Control.Tasks.TaskBuilder.StepStateMachine`1.continuation">
+<summary>
+ The continuation we left off awaiting on our last MoveNext().
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.StepStateMachine`1.Run">
+<summary>
+ Start execution as a `Task&lt;&apos;m&gt;`.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.StepStateMachine`1.System-Runtime-CompilerServices-IAsyncStateMachine-MoveNext">
+<summary>
+ Proceed to one of three states: result, failure, or awaiting.
+ If awaiting, MoveNext() will be called again when the awaitable completes.
+</summary>
+</member>
+<member name="T:FSharp.Control.Tasks.TaskBuilder.StepStateMachine`1">
+<summary>
+ Implements the machinery of running a `Step&lt;&apos;m, &apos;m&gt;` as a `Task&lt;&apos;m&gt;`.
+</summary>
+</member>
+<member name="T:FSharp.Control.Tasks.TaskBuilder.Step`1">
+<summary>
+ Represents the state of a computation:
+ either awaiting something with a continuation,
+ or completed with a return value.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.run``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,FSharp.Control.Tasks.TaskBuilder.Step{``0}})">
+<summary>
+ Runs a step as a task -- with a short-circuit for immediately completed steps.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.forLoop``1(System.Collections.Generic.IEnumerable{``0},Microsoft.FSharp.Core.FSharpFunc{``0,FSharp.Control.Tasks.TaskBuilder.Step{Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Implements a loop that runs `body` for each element in `sequence`.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.using``2(``0,Microsoft.FSharp.Core.FSharpFunc{``0,FSharp.Control.Tasks.TaskBuilder.Step{``1}})">
+<summary>
+ Implements a using statement that disposes `disp` after `body` has completed.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.tryFinally``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,FSharp.Control.Tasks.TaskBuilder.Step{``0}},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Wraps a step in a try/finally. This catches exceptions both in the evaluation of the function
+ to retrieve the step, and in the continuation of the step (if any).
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.tryWith``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,FSharp.Control.Tasks.TaskBuilder.Step{``0}},Microsoft.FSharp.Core.FSharpFunc{System.Exception,FSharp.Control.Tasks.TaskBuilder.Step{``0}})">
+<summary>
+ Wraps a step in a try/with. This catches exceptions both in the evaluation of the function
+ to retrieve the step, and in the continuation of the step (if any).
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.whileLoop(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,FSharp.Control.Tasks.TaskBuilder.Step{Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Builds a step that executes the body while the condition predicate is true.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.combine``1(FSharp.Control.Tasks.TaskBuilder.Step{Microsoft.FSharp.Core.Unit},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,FSharp.Control.Tasks.TaskBuilder.Step{``0}})">
+<summary>
+ Chains together a step with its following step.
+ Note that this requires that the first step has no result.
+ This prevents constructs like `task { return 1; return 2; }`.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.ret``1(``0)">
+<summary>
+ Used to return a value.
+</summary>
+</member>
+<member name="M:FSharp.Control.Tasks.TaskBuilder.zero">
+<summary>
+ Used to represent no-ops like the implicit empty &quot;else&quot; branch of an &quot;if&quot; expression.
+</summary>
+</member>
+<member name="M:Rezoom.AsynchronousErrand`1.Prepare(Rezoom.ServiceContext)">
+<summary>
+ Given a `ServiceContext` with which to obtain execution-local or step-local shared services,
+ adds the work this errand needs to do to a shared batch, and returns a function that can be called to
+ force execution of the entire batch and return a task that will get this errand&apos;s result.
+</summary>
+</member>
+<member name="T:Rezoom.AsynchronousErrand`1">
+<summary>
+ Base class for errands that retrieve their data asynchronously using a `System.Threading.Task`.
+</summary>
+</member>
+<member name="T:Rezoom.BatchHint`1">
+<summary>
+ Hint that it is OK to batch the given sequence or task
+</summary>
+</member>
+<member name="P:Rezoom.CacheInfo.InvalidationMask">
+<summary>
+ A 128-bit mask where bits set to 1 represent dependencies invalidated by executing this errand.
+ When the errand runs, any cached results from errands in this `Category` which had any of these bits in their
+ `DependencyMask` will be discarded.
+</summary>
+</member>
+<member name="P:Rezoom.CacheInfo.Identity">
+<summary>
+ A non-null comparable object that uniquely (within Category) identifies the function that produced this errand.
+ For example, the string &quot;userById&quot; might be a reasonable identity for an errand returned from
+ `getUserById 27`.
+</summary>
+</member>
+<member name="P:Rezoom.CacheInfo.DependencyMask">
+<summary>
+ A 128-bit mask where bits set to 1 represent dependencies of this errand. If another errand runs in this or a
+ later execution step that includes *any* of these bits in its InvalidationMask, the cached result for this
+ errand will be discarded.
+</summary>
+</member>
+<member name="P:Rezoom.CacheInfo.Category">
+<summary>
+ A non-null comparable object which identifies the cache that this errand should use. Each category gets its
+ own isolated cache, so results associated with it can&apos;t be interfered with by errands from other categories.
+ Typically all errands defined by a library will have the same category because their identities are known
+ not to collide. A good choice for overriding this is `typeof&lt;PrivateTypeInMyLibrary`.
+</summary>
+</member>
+<member name="P:Rezoom.CacheInfo.Cacheable">
+<summary>
+ Determines whether this errand&apos;s result can be cached. It is useful to specify cache info even for
+ errands that can&apos;t be cached, because they can still invalidate other cached results, and specifying their
+ identities is useful for logging.
+</summary>
+</member>
+<member name="T:Rezoom.DataResponse.RetrievalDeferred">
+<summary>
+ The errand has not yet been run.
+</summary>
+</member>
+<member name="T:Rezoom.DataResponse.RetrievalException">
+<summary>
+ The errand failed with an exception.
+</summary>
+</member>
+<member name="T:Rezoom.DataResponse.RetrievalSuccess">
+<summary>
+ The errand ran and produced a result.
+</summary>
+</member>
+<member name="P:Rezoom.Errand.SequenceGroup">
+<summary>
+ A comparable object (or null).
+ Errands with the same non-null sequence group will not be executed concurrently with one another.
+</summary>
+</member>
+<member name="P:Rezoom.Errand.CacheInfo">
+<summary>
+ Specifies caching information for the errand. This can be used for purposes other than
+ caching as well, such as logging and replaying logged/serialized results.
+</summary>
+</member>
+<member name="P:Rezoom.Errand.CacheArgument">
+<summary>
+ A comparable object (or null) that represents the dynamic part of this errand&apos;s caching identity.
+ This is separate because typically the rest of the cache info can be static for a given function that produces
+ errands, and the argument can be the only thing that varies for each individual errand.
+</summary>
+</member>
+<member name="M:Rezoom.Errand.PrepareUntyped(Rezoom.ServiceContext)">
+<summary>
+ Given a `ServiceContext` with which to obtain execution-local or step-local shared services,
+ adds the work this errand needs to do to a shared batch, and returns a function that can be called to
+ force execution of the entire batch and return a task that will get this errand&apos;s result.
+ Untyped version intended for internal use only.
+</summary>
+</member>
+<member name="T:Rezoom.Errand">
+<summary>
+ Base class for all errands.
+</summary>
+</member>
+<member name="T:Rezoom.Errand`1">
+<summary>
+ An errand implements an activity that might run in batches or have a cacheable result.
+ A SQL query, an HTTP request, or an FTP operation would all be good candidates to represent as errands.
+ An `Errand&lt;&apos;a&gt;` returns data of type `&apos;a`.
+</summary>
+</member>
+<member name="M:Rezoom.SynchronousErrand`1.Prepare(Rezoom.ServiceContext)">
+<summary>
+ Given a `ServiceContext` with which to obtain execution-local or step-local shared services,
+ adds the work this errand needs to do to a shared batch, and returns a function that can be called to
+ force execution of the entire batch and return this errand&apos;s result.
+</summary>
+</member>
+<member name="T:Rezoom.SynchronousErrand`1">
+<summary>
+ Base class for errands that retrieve their data synchronously (i.e. with a plain old function call).
+</summary>
+</member>
+<member name="F:Rezoom.Execution.CategoryCache.invalidationMask">
+<summary>
+ Pending invalidation mask.
+</summary>
+</member>
+<member name="F:Rezoom.Execution.CategoryCache.generation">
+<summary>
+ Generation of invalidations we&apos;re on.
+</summary>
+</member>
+<member name="F:Rezoom.Execution.CategoryCache.history">
+<summary>
+ Moving window of dependency bitmasks, indexed by generation % windowSize.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.forA``1(System.Collections.Generic.IEnumerable{``0},Microsoft.FSharp.Core.FSharpFunc{``0,Rezoom.Plan{Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Applicative iteration.
+ Create a task that strictly iterates a sequence, creating a `Plan` for each element
+ using the given `iteration` function, then runs those tasks concurrently.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.forM``1(System.Collections.Generic.IEnumerable{``0},Microsoft.FSharp.Core.FSharpFunc{``0,Rezoom.Plan{Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Monadic iteration.
+ Create a task that lazily iterates a sequence, executing `iteration` for each element.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.tryFinally``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Rezoom.Plan{``0}},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Wrap a `Plan&lt;&apos;a&gt;` with a block that must execute.
+ When the task is executed, the function `onExit` will be called
+ after `wrapped` completes, regardless of whether the task
+ succeeded, failed to be created, or failed while partially executed.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.tryCatch``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Rezoom.Plan{``0}},Microsoft.FSharp.Core.FSharpFunc{System.Exception,Rezoom.Plan{``0}})">
+<summary>
+ Wrap a `Plan&lt;&apos;a&gt;` with an exception handler.
+ The exception handler `catcher` will be called if an exception is thrown
+ during execution of `wrapped`, whether it&apos;s in creating the `Plan`
+ to be run or in executing any step of the resulting task.
+ The exception handler may rethrow the exception.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.tuple4``4(Rezoom.Plan{``0},Rezoom.Plan{``1},Rezoom.Plan{``2},Rezoom.Plan{``3})">
+<summary>
+ Create a task that runs `taskA`, `taskB`, `taskC`, and `taskD` concurrently
+ and combines their results into a tuple.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.tuple3``3(Rezoom.Plan{``0},Rezoom.Plan{``1},Rezoom.Plan{``2})">
+<summary>
+ Create a task that runs `taskA`, `taskB`, and `taskC` concurrently and combines their results into a tuple.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.tuple2``2(Rezoom.Plan{``0},Rezoom.Plan{``1})">
+<summary>
+ Create a task that runs `taskA` and `taskB` concurrently and combines their results into a tuple.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.apply``2(Rezoom.Plan{Microsoft.FSharp.Core.FSharpFunc{``0,``1}},Rezoom.Plan{``0})">
+<summary>
+ Create a task that will eventually apply the function produced by
+ `taskF` to the value produced by `taskA` to obtain its result.
+ The two tasks are independent, so they will execute concurrently and
+ share batchable resources.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.bind``2(Rezoom.Plan{``0},Microsoft.FSharp.Core.FSharpFunc{``0,Rezoom.Plan{``1}})">
+<summary>
+ Chain a continuation `Plan` onto an existing `Plan` to
+ get a new `Plan`.
+ The continuation can be dependent on the result of the first task.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.map``2(Microsoft.FSharp.Core.FSharpFunc{``0,``1},Rezoom.Plan{``0})">
+<summary>
+ Map a function over the result of a `Plan&lt;&apos;a&gt;`, producing a new `Plan&lt;&apos;b&gt;`.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.ofErrand``1(Rezoom.Errand{``0})">
+<summary>
+ Convert an `Errand&lt;&apos;a&gt;` to a `Plan&lt;&apos;a&gt;`.
+</summary>
+</member>
+<member name="P:Rezoom.Plan.zero">
+<summary>
+ Monoidal identity for `Plan`.
+ Equivalent to `ret ()`.
+</summary>
+</member>
+<member name="M:Rezoom.Plan.ret``1(``0)">
+<summary>
+ Monadic return for `Plan`s.
+ Creates a `Plan` with no steps, whose immediate result is `result`.
+</summary>
+</member>
+</members>
+</doc>

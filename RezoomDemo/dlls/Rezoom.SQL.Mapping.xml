@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Rezoom.SQL.Mapping</name></assembly>
+<members>
+<member name="P:Rezoom.SQL.Mapping.Blueprint.Output">
+<summary>
+ The type (possibly a collectiont ype) this blueprint specifies how to construct.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.BlueprintColumnNameAttribute">
+<summary>
+ Indicates that a property is represented with a different column name than its own member name.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.BlueprintConstructorAttribute">
+<summary>
+ Marks a constructor as being the one to use when creating entities from blueprints.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.BlueprintKeyAttribute">
+<summary>
+ Marks a property as being part of the primary key of its composite type.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.BlueprintNoKeyAttribute">
+<summary>
+ Indicates that a class has no key properties and should not be de-duplicated.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.Cardinality.Many">
+<summary>
+ Carries an element type blueprint and a method converting an ICollection&lt;Builder&lt;ElementType&gt;&gt;
+ to the target collection type.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Column.ReverseRelationship">
+<summary>
+ The column on this column&apos;s type that points to this.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Column.Getter">
+<summary>
+ The way to get this column&apos;s value (could be used for analyzing expression trees).
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Column.Setter">
+<summary>
+ The way to set this column when initializing an instance of the composite type.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Column.Blueprint">
+<summary>
+ The blueprint for this column&apos;s type.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Column.Name">
+<summary>
+ The name of this column. This is the basename of the SQL column name that
+ will represent it. This should always be treated case-insensitively.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Command.ResultSetCount">
+<summary>
+ The number of result sets this command will return, if it can be statically determined.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CommandFragment.Whitespace">
+<summary>
+ At least one unit of whitespace.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CommandFragment.Parameter">
+<summary>
+ References parameter by index.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CommandFragment.CommandText">
+<summary>
+ Chunk of raw SQL text.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CommandFragment.LocalName">
+<summary>
+ A name which should be localized to this command for batching.
+ For example, if the command creates a temp table, the real name should be chosen dynamically
+ so it doesn&apos;t break when the command is batched with others that create the same-named temp table.
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.CommandFragment.Stringize(System.Collections.Generic.IEnumerable{Rezoom.SQL.Mapping.CommandFragment})">
+<summary>
+ Converts a sequence of fragments *without parameters* to a string.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.Command`1">
+<summary>
+ A command which can be expected to produce `&apos;output` when run.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Composite.Columns">
+<summary>
+ All the columns of this composite type (including the identity, if any).
+ Indexed by name, case insensitive.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Composite.Identity">
+<summary>
+ The identity columns for this composite type, if any.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Composite.Constructor">
+<summary>
+ The constructor to use when instantiating this composite type.
+ All parameters must be supplied by columns.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.ElementBlueprint.Output">
+<summary>
+ The element type this blueprint specifies how to construct.
+</summary>
+</member>
+<member name="P:Rezoom.SQL.Mapping.Primitive.Converter">
+<summary>
+ A method converting an object to the output type.
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.ResultSetProcessor.ProcessRow">
+<summary>
+ Process a single row of the result set.
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.ResultSetProcessor.ObjectGetResult">
+<summary>
+ Obtain the result object after processing *all* result sets.
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.ResultSetProcessor.BeginResultSet(System.Data.IDataReader)">
+<summary>
+ Start processing a result set.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.ResultSets">
+<summary>
+ Represents multiple result sets as the output from a single command.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.Setter.SetProperty">
+<summary>
+ We initialize this column by setting a property post-construction.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.Setter.SetField">
+<summary>
+ We initialize this column by setting a field post-construction.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.Setter.SetConstructorParameter">
+<summary>
+ We initialize this column by passing it to the composite&apos;s constructor.
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.BlueprintModule.pickIdentity(System.Type,System.Collections.Generic.IReadOnlyDictionary{System.String,Rezoom.SQL.Mapping.Column})">
+<summary>
+ Pick, in order of most to least preferred:
+ - the column whose getter is annotated with [&lt;BlueprintKey&gt;] 
+ - the column named &quot;ID&quot;
+ - the column named &quot;{TypeName}ID&quot;
+</summary>
+</member>
+<member name="M:Rezoom.SQL.Mapping.BlueprintModule.pickConstructor(System.Type)">
+<summary>
+ Get the constructor that the blueprint for `ty` should use.
+ This is simply the constructor with the most parameters,
+ unless there is a constructor with `[&lt;BlueprintConstructor&gt;]`,
+ in which case that one will be used.
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CodeGeneration.ConversionMethod">
+<summary>
+ A conversion that assumes an obj is on the stack, and pushes a value of whatever type is being
+ converted to (depends on the context in which you see the conversion).
+</summary>
+</member>
+<member name="T:Rezoom.SQL.Mapping.CodeGeneration.RowConversionMethod">
+<summary>
+ Takes `Row` and `ColumnInfo` and pushes a value of whatever type if being converted to.
+</summary>
+</member>
+</members>
+</doc>
