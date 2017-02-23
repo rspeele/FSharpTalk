@@ -56,7 +56,6 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="TypeProviderHTML.fsx" />
     <Content Include="1205.txt" />
     <None Include="FizzBuzz.fsx" />
     <None Include="FizzBuzz.csx" />
@@ -69,11 +68,18 @@
     <None Include="ExpressionClasses.fsx" />
     <None Include="ExpressionClasses.csx" />
     <None Include="ExpressionDU.fsx" />
+    <None Include="OtherDUs.fsx" />
     <None Include="OtherPatternMatching.fsx" />
-    <Content Include="1230.txt" />
+    <None Include="InlineFunctions.fsx" />
+    <Content Include="1235.txt" />
     <None Include="sample.csv" />
     <None Include="TypeProviderCSV.fsx" />
-    <None Include="InlineFunctions.fsx" />
+    <None Include="TypeProviderHTML.fsx" />
+    <Content Include="1245.txt" />
+    <None Include="ComputationExpressions.fsx" />
+    <None Include="ComputationExpressions.csx" />
+    <Content Include="1230.txt" />
+    <Content Include="0100.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">

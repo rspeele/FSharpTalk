@@ -3,6 +3,7 @@
 * .NET language, but much more differences between C# and F# than between C# and VB.NET
 * Do emphasise the ease of adding F# code to a largely C# solution
 * Have been vaguely familiar with it for 4 years, finally jumped into using it on DC-UPS in March 2015
+* F# interactive is handy -- show as calculator, hello world
 
 # Boring stuff
 
@@ -16,6 +17,7 @@
 
 * Modules are just static classes with a lightweight way of writing them
 * Let-bound functions, typically camelCase
+* Implicit return
 * Functions can define inner functions
 * Functions take arguments without parentheses, commas
 * Full type inference -- compiler knows args are ints because they are compared with/added to integer literals
@@ -24,7 +26,8 @@
 ## Rectangle
 
 * More type inference
-* Classes are pretty much written like C#
+* More implicit returns
+* Classes are not super different from C#
 * Primary constructor: constructor arguments are implicitly private readonly fields
 * Triple-slash comment is XML <summary> block, easy to slap on some quick notes for Intellisense.
 
@@ -65,10 +68,45 @@
   * Data in transport
   * X,Y,Z,Other of string
 
+  ## OtherDUs
+
+  * Option vs System.Nullable
+
 # OtherPatternMatching
 
+* Pattern matching is a general purpose feature
+* More things you can do with it than I have time for
+* By the way tuples are a thing
 
+# InlineFunctions
 
+* There are some sort-of generic functions you can't write generically
+* Math.Abs is a good example -- it has 7 overloads to support different numeric types
+* F# lets you define functions like this "inline", supporting a much wider set of generic constraints
+* Use one function to interact with many types that follow the same convention when an interface won't suffice
+* TryParse example works for int.TryParse, DateTime.TryParse, decimal.TryParse, TimeSpan.TryParse etc etc.
 
+# TypeProviderCSV
+
+* Type providers are essentially compiler plugins
+* Fill the same roles as code-generation tools, but:
+  * Much less effort to use
+  * No extra build step to manage
+  * No generated code artifacts in source control
+* Type x = ... generic parameter is a string, this runs when you build your program or in VS for Intellisense
+
+# TypeProviderHTML
+
+* Scraping HTML is a painful task and the code is brittle -- subject to break if the page changes
+* Can't fix the second part, but can make it very easy to scrape
+* Not crazy about having the compiler make a network call to build my program, in reality unless it was
+  just a quick script would use a local copy of the file
+
+# ComputationExpressions
+
+* Could spend an hour talking about this feature alone
+* Start with the basics: IEnumerable<T> and yield
+* In F# it is an expression (no surprise)
+* Also used for async which is like C# async/await
 
 
