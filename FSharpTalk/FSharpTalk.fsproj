@@ -78,7 +78,6 @@
     <Content Include="1245.txt" />
     <None Include="ComputationExpressions.fsx" />
     <None Include="ComputationExpressions.csx" />
-    <Content Include="1230.txt" />
     <Content Include="0100.txt" />
   </ItemGroup>
   <ItemGroup>

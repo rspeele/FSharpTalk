@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public static class FizzBuzzer
 {
@@ -10,7 +11,7 @@ public static class FizzBuzzer
                 i % 15 == 0 ? "FizzBuzz"
                 : i % 3 == 0 ? "Fizz"
                 : i % 5 == 0 ? "Buzz"
-                : i.ToString();
+                : i.ToString(CultureInfo.InvariantCulture);
 
             Console.WriteLine(fizzbuzz);
         }

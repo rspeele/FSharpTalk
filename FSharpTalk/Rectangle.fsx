@@ -20,3 +20,7 @@ type Rectangle(top, left, width, height) =
         && inner.Right <= this.Right
     override this.ToString() =
         sprintf "(%d,%d),(%d,%d)" this.Top this.Left this.Bottom this.Right
+
+
+
+

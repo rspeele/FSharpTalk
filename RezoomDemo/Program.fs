@@ -11,8 +11,7 @@ type Migrations = SQLModel<".">
 
 let migrate() =
     let dbname = "test.db"
-    if not <| File.Exists(dbname) then
-        SQLiteConnection.CreateFile(dbname)
+    SQLiteConnection.CreateFile(dbname)
     use conn = new SQLiteConnection("data source=" + dbname)
     conn.Open()
     let config =
@@ -33,7 +32,8 @@ type AddToDo = SQL<"""
 """>
 
 type ListUsersAndToDos = SQL<"""
-    select u.Id, u.Email, u.Name, t.Heading as ToDoHeading, t.Paragraph as ToDoParagraph from Users u
+    select u.Id, u.Email, u.Name, t.Heading as ToDoHeading, t.Paragraph as ToDoParagraph
+    from Users u
     left join ToDos t on t.CreatedById = u.Id
 """>
 
