@@ -79,6 +79,7 @@
     <None Include="ComputationExpressions.fsx" />
     <None Include="ComputationExpressions.csx" />
     <Content Include="0100.txt" />
+    <None Include="POCO.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">
