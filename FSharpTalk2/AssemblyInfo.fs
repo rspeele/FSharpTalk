@@ -1,4 +1,4 @@
-﻿namespace RezoomDemo.AssemblyInfo
+﻿namespace FSharpTalk2.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("RezoomDemo")>]
+[<assembly: AssemblyTitle("FSharpTalk2")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("RezoomDemo")>]
+[<assembly: AssemblyProduct("FSharpTalk2")>]
 [<assembly: AssemblyCopyright("Copyright ©  2017")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]
@@ -22,7 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: ComVisible(false)>]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[<assembly: Guid("e60f25b6-38f6-4e48-9091-faf60bdfb4ad")>]
+[<assembly: Guid("225ab696-3558-49c1-b47b-1a08ae67d5e4")>]
 
 // Version information for an assembly consists of the following four values:
 // 
