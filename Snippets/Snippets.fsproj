@@ -50,12 +50,13 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Content Include="packages.config" />
     <Compile Include="AssemblyInfo.fs" />
     <None Include="Whitespace.fsx" />
     <None Include="TypeInference.fsx" />
     <None Include="NotStatements.fsx" />
-    <Content Include="packages.config" />
     <None Include="PrimaryConstructor.fsx" />
+    <None Include="Functions.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
