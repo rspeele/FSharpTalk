@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpConsoleApp3", "CSharp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpConsoleApp", "FSharpConsoleApp\FSharpConsoleApp.fsproj", "{6BC8F628-2C86-4870-9111-23D98ABDA6D6}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FormulaDemo", "FormulaDemo\FormulaDemo.fsproj", "{FA5E76FB-172F-40D1-913A-D03DFB707B65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{6BC8F628-2C86-4870-9111-23D98ABDA6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC8F628-2C86-4870-9111-23D98ABDA6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BC8F628-2C86-4870-9111-23D98ABDA6D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA5E76FB-172F-40D1-913A-D03DFB707B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA5E76FB-172F-40D1-913A-D03DFB707B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA5E76FB-172F-40D1-913A-D03DFB707B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA5E76FB-172F-40D1-913A-D03DFB707B65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
