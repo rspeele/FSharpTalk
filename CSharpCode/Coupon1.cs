@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpCode
+namespace CSharpCode1
 {
     // From documentation at:
     // https://stripe.com/docs/api#coupon_object

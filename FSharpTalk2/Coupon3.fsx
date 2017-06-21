@@ -27,14 +27,16 @@ let exampleCoupon =
         Created = DateTime.UtcNow
     }
 
-// example: consuming a coupon
+// example: consuming a coupon discount
 
-let discountedPrice(coupon : Coupon, priceCurrency : string, price : decimal) =
-    match coupon.Discount with
+let discountedPrice
+    (discount : CouponDiscount, priceCurrency : string, price : decimal) =
+    match discount with
     | AmountOff(currency, amount) ->
         if priceCurrency = currency then
             price - amount
         else
-            raise(ArgumentException("Currency does not match", "priceCurrency"))
+            raise(ArgumentException
+                ("Currency does not match", "priceCurrency"))
     | PercentOff(percent) ->
         price - (price * percent / 100.0m)

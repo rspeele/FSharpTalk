@@ -51,8 +51,11 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <None Include="DUs.fsx" />
     <None Include="ComputationExpressions.fsx" />
+    <None Include="Coupon3.fsx" />
+    <None Include="Json.fsx" />
+    <None Include="TryParse.fsx" />
+    <None Include="WinSCP.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

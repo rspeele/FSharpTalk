@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebConsoleApp", "WebConsole
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Snippets", "Snippets\Snippets.fsproj", "{4C0E9847-B62C-4389-B70F-52B5F8F1C93D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCode", "CSharpCode\CSharpCode.csproj", "{AE31A6C1-9858-46A0-BF6C-976D9DC73123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4C0E9847-B62C-4389-B70F-52B5F8F1C93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0E9847-B62C-4389-B70F-52B5F8F1C93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0E9847-B62C-4389-B70F-52B5F8F1C93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE31A6C1-9858-46A0-BF6C-976D9DC73123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE31A6C1-9858-46A0-BF6C-976D9DC73123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE31A6C1-9858-46A0-BF6C-976D9DC73123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE31A6C1-9858-46A0-BF6C-976D9DC73123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
